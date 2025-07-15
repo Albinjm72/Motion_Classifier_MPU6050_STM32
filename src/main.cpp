@@ -114,11 +114,9 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 
-  	UART_Printf("Starting Edge Impulse Motion Classifier\r\n");
-    init_mpu6050();
-
-
-
+ UART_Printf("Starting Edge Impulse Motion Classifier\r\n");
+ init_mpu6050();
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -386,6 +384,7 @@ void run_edge_impulse_classifier() {
     if (res == EI_IMPULSE_OK) {
         for (size_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
             float val = result.classification[i].value;
+	// CubeIDE may not support for float, convert it to decimal::
             int whole = (int)val;
             int frac = (int)((val - (float)whole) * 100.0f);
             if (frac < 0) frac = -frac;
